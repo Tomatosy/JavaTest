@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seasky.sytest.dal.UserDAL">
+    <resultMap id="UserOut" type="com.seasky.sytest.model.UserOut">
+        <result property="userId" column="UserID"/>
+        <result property="userName" column="UserName"/>
+        <result property="passWord" column="PassWord"/>
+        <result property="userDesc" column="UserDesc"/>
+    </resultMap>
+    <select id="selectUseToList"
+            resultType="com.seasky.sytest.model.UserOut">
+        SELECT UserID,UserName,PassWord,UserDesc FROM tbUser
+        WHERE 1=1
+        <if test="condition.userName != null and condition.userName != ''">
+            and UserName like concat('%',#{condition.userName},'%')
+        </if>
+        ORDER BY [UserName]
+    </select>
+</mapper>
+
+
